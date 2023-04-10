@@ -1,124 +1,57 @@
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { MdDownload, MdPointOfSale } from 'react-icons/md';
+import { FaEnvelope, FaUserPlus, FaTrafficLight } from 'react-icons/fa';
+import CircularBar from '@/components/CircularBar';
+import Card from '@/components/Card';
+import data from "../../data.json"
 
-const inter = Inter({ subsets: ['latin'] })
+import MyResponsiveLine from '@/components/MyResponsiveLine';
+import Cards from '@/components/Cards';
+import Line from '@/components/chart/Line';
+import Transactions from '@/components/Transactions';
+import BigCircularBar from '@/components/BigCircularBar';
+import Bar from '@/components/chart/Bar';
+import Geo from '@/components/chart/Geo';
+
+
 
 export default function Home() {
+  const TEXT_COLOR = "text-light-TXC-600 dark:text-dark-TXC-100"
+  const BACK_GRAOUND_COLOR = "bg-light-BGSC dark:bg-dark-BGSC"
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <main className="px-6 xs:px-2">
+        <div className='flex justify-between'>
+          <div>
+            <h1 className={`text-3xl font-bold ${TEXT_COLOR} md:text-2xl sm:text-xl`}>DASHBOARD</h1>
+            <p className='text-greenAccent-400 font-semibold mt-2 md:text-sm'>Welcome to your dashboard</p>
+          </div>
+          <div className='flex space-x-2 items-center self-end px-2 rounded-md h-10 dark:bg-blueAccent-400 bg-blueAccent-100 sm:bg-light-BGC sm:dark:bg-dark-BGC'>
+            <MdDownload className={`w-5 h-5 ${TEXT_COLOR} md:w-4 md:h-4 sm:text-greenAccent-400 sm:w-6 sm:h-6`} />
+            <button className={`${TEXT_COLOR} text-sm font-bold md:text-xs sm:hidden`}>DOWNLOAD REPORTS</button>
+          </div>
         </div>
-      </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        <div className='grid grid-cols-12 gap-5 mt-7 xs:gap-2'>
+          <Cards />
+          <Line />
+          <Transactions />
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          <div className={`col-span-4 3xl:col-span-6 lg:col-span-12 p-5 flex flex-col items-center ${BACK_GRAOUND_COLOR}`}>
+            <h2 className={`${TEXT_COLOR} font-semibold self-start mb-4 md:text-sm`}>Campaign</h2>
+            <BigCircularBar />
+            <p className={`text-greenAccent-400 mt-4 md:text-sm`}>
+              $48,352 revenue generated
+            </p>
+            <p className={`${TEXT_COLOR} mb-4 md:text-sm xs:text-xs xs:text-center`}>Includes extra misc expenditures and costs</p>
+          </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          <Bar />
+          <Geo />
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
+        </div>
+      </main>
+    </>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
   )
 }
