@@ -4,7 +4,6 @@ import { FaEnvelope, FaUserPlus, FaTrafficLight } from 'react-icons/fa';
 import CircularBar from '@/components/CircularBar';
 import Card from '@/components/Card';
 import data from "../../data.json"
-
 import MyResponsiveLine from '@/components/MyResponsiveLine';
 import Cards from '@/components/Cards';
 import Line from '@/components/chart/Line';

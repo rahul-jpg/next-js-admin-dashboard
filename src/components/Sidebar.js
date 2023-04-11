@@ -14,7 +14,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
     return (
         <>
-            <div className={`${isOpen ? "w-64 sm:shadow-xl" : "w-20 sm:w-16 sm:p-5 sm:h-12  sm:rounded-br-full"}  overflow-hidden sm:transition-all sm:duration-150 sm:ease-in-out ${BACK_GRAOUND_COLOR} h-screen p-6 flex flex-col items-center sm:fixed sm:top-0 sm:left-0 z-10 `}>
+            <div className={`${isOpen ? "w-64 sm:shadow-xl" : "w-20 sm:w-16 sm:p-5 sm:h-12  sm:rounded-br-full"}  overflow-hidden sm:transition-all sm:duration-150 sm:ease-in-out ${BACK_GRAOUND_COLOR} h-screen p-6 flex flex-col items-center sm:fixed sm:top-0 sm:left-0 z-20 `}>
 
                 <div className={`p-2 self-start absolute top-2 left-4 sm:top-2`} onClick={handleClick}>
                     <span className={` bg-light-TXC-100 dark:bg-dark-TXC-100 block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isOpen ? "rotate-45 translate-y-1" : "-translate-y-0.5"}`}></span>

@@ -21,4 +21,24 @@
     background: #555;
   }
 
+  /* input[type=checkbox] {
+   position: relative;
+  }
+
+  input[type=checkbox]::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+   }
+
+   input[type=checkbox]:checked::after{
+    background-color: transparent;
+   }
+
+  input[type=checkbox]:checked {
+    opacity: 100;
+   } */
+
 
