@@ -2,6 +2,7 @@ import { useState } from "react";
 import { teamData } from "../../teamData"
 import { AiFillCaretDown, AiFillDelete, AiOutlineEdit, AiOutlineClose } from 'react-icons/ai';
 import { FiChevronDown } from 'react-icons/fi';
+import Pagination from "@/components/Pagination";
 
 const Team = () => {
 
@@ -12,7 +13,13 @@ const Team = () => {
 
     // ALL STATES
     const [users, setUsers] = useState(teamData);
-    const [filteredUsers, setFilteredUsers] = useState(teamData);
+    const [paginationHide, setPaginationHide] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [usersPerPage, setUsersPerPage] = useState(5);
+    let indexOfLastUser = currentPage * usersPerPage
+    let indexOfFirstUser = indexOfLastUser - usersPerPage
+    let currentUsers = users.slice(indexOfFirstUser, indexOfLastUser)
+    const [filteredUsers, setFilteredUsers] = useState(currentUsers);
     const [sortOrder, setSortOrder] = useState('asc');
     const [selectedRows, setSelectedRows] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
@@ -37,6 +44,61 @@ const Team = () => {
     });
     const [changeBtnBehavior, setChangeBtnBehavior] = useState("");
 
+
+
+    // FUNTION FOR PAGINATION
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber)
+        indexOfLastUser = pageNumber * usersPerPage
+        indexOfFirstUser = indexOfLastUser - usersPerPage
+        currentUsers = users.slice(indexOfFirstUser, indexOfLastUser)
+        setFilteredUsers(currentUsers)
+    }
+
+    // FUNCTION FOR PREV PAGE
+    const prevBtn = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+            indexOfLastUser = (currentPage - 1) * usersPerPage
+            indexOfFirstUser = indexOfLastUser - usersPerPage
+            currentUsers = users.slice(indexOfFirstUser, indexOfLastUser)
+            setFilteredUsers(currentUsers)
+        }
+    }
+
+    // FUNCTION FOR NEXT PAGE
+    const nextBtn = () => {
+        if (currentPage < Math.ceil(users.length / usersPerPage)) {
+            setCurrentPage(currentPage + 1)
+            indexOfLastUser = (currentPage + 1) * usersPerPage
+            indexOfFirstUser = indexOfLastUser - usersPerPage
+            currentUsers = users.slice(indexOfFirstUser, indexOfLastUser)
+            setFilteredUsers(currentUsers)
+        }
+
+    }
+
+    // ONCHANGE FUNCTION FOR USERS PER PAGE
+    const handleUsersPerPageChange = (e) => {
+        if (currentPage > 1) {
+            setCurrentPage(1)
+            setUsersPerPage(Number(e.target.value))
+            indexOfLastUser = 1 * Number(e.target.value)
+            indexOfFirstUser = indexOfLastUser - Number(e.target.value)
+            currentUsers = users.slice(indexOfFirstUser, indexOfLastUser)
+            setFilteredUsers(currentUsers)
+
+        } else {
+            setUsersPerPage(Number(e.target.value))
+            indexOfLastUser = currentPage * Number(e.target.value)
+            indexOfFirstUser = indexOfLastUser - Number(e.target.value)
+            currentUsers = users.slice(indexOfFirstUser, indexOfLastUser)
+            setFilteredUsers(currentUsers)
+        }
+
+    }
+
+
     // FUNCTION FOR SORT USER BY INCREASING ORDER OR DECREASING ORDER
     const handleSort = (key) => {
         const order = sortOrder === 'asc' ? 'desc' : 'asc';
@@ -50,8 +112,9 @@ const Team = () => {
 
     // ONCHANGE FUNCTION FOR FILTER USER
     const handleFilterChange = (event) => {
+        event.target.value !== "" ? setPaginationHide(true) : setPaginationHide(false);
         const value = event.target.value.toLowerCase();
-        const filtered = users.filter((item) => {
+        const filtered = currentUsers.filter((item) => {
             if (filterByOptions === "all") {
                 return item.id.toString().includes(value) ||
                     item.name.toLowerCase().includes(value) ||
@@ -96,8 +159,9 @@ const Team = () => {
 
     // FUNCTION FOR DELETE USER
     const handleDeleteUser = () => {
-        let dataFilter = filteredUsers.filter(row => selectedRows.find(item => row.id === item.id) === undefined)
-        setFilteredUsers(dataFilter)
+        let dataFilter = users.filter(row => selectedRows.find(item => row.id === item.id) === undefined)
+        currentUsers = dataFilter.slice(indexOfFirstUser, indexOfLastUser)
+        setFilteredUsers(currentUsers)
         setUsers(dataFilter)
         setSelectedRows([])
     }
@@ -200,7 +264,7 @@ const Team = () => {
     // FUNCTION FOR ADD NEW USER
     const handleAddNewUser = (e) => {
         e.preventDefault()
-        setFilteredUsers(prev => [...prev, { ...addAndUpdateUser, id: prev.length + 1 }])
+        setFilteredUsers(prev => [...prev, { ...addAndUpdateUser, id: users.length + 1 }])
         setUsers(prev => [...prev, { ...addAndUpdateUser, id: prev.length + 1 }])
     }
 
@@ -283,11 +347,11 @@ const Team = () => {
     });
 
     return (
-        <div className={`w-full px-6 ${TEXT_COLOR} 2xl:text-sm sm:text-xs sm:px-2 relative`}>
+        <div className={`w-full px-6 ${TEXT_COLOR} 2xl:text-sm h-screen sm:text-xs sm:px-2 relative`}>
 
             <div className="grid relative flex-wrap grid-cols-12 gap-2">
 
-                <div className="col-span-3 lg:col-span-6 xs:col-span-12">
+                <div className="col-span-3 lg:col-span-8">
                     {/* SELECT OPTION FOR FILTER USERS */}
                     <select
                         defaultValue="id"
@@ -329,23 +393,23 @@ const Team = () => {
                 {/* BUTTON FOR DELETE USER */}
                 <button
                     onClick={handleDeleteUser}
-                    className={`py-2 px-3 bg-red-500 text-dark-TXC-100 col-span-3 lg:col-span-6 xs:col-span-12`}>
+                    className={`py-2 px-3 bg-red-500 text-dark-TXC-100 col-span-3 lg:col-span-4 `}>
                     DELETE
                 </button>
 
                 {/* BUTTON FOR ADD USER */}
                 <button
                     onClick={handleOpenModalForNewUser}
-                    className={`py-2 px-3 ${BACK_GRAOUND_COLOR} ${TEXT_COLOR} col-span-3 lg:col-span-6 xs:col-span-12`}>
+                    className={`py-2 px-3 ${BACK_GRAOUND_COLOR} ${TEXT_COLOR} col-span-3 lg:col-span-6`}>
                     ADD USER
                 </button>
 
                 {/*SECTION FOR HIDE COLUMNS  */}
-                <div className="relative col-span-3 lg:col-span-6  xs:col-span-12">
+                <div className="col-span-3 lg:col-span-6 relative">
                     <div className={`absolute z-10 top-0 left-0 ${columDisplayCollapse ? "h-[2.5rem] 2xl:h-[2.25rem] sm:h-[2rem]" : "h-72"} overflow-hidden transition-all duration-300 ease-in cursor-pointer ${BACK_GRAOUND_COLOR} ${TEXT_COLOR} shadow-md w-full`}>
 
-                        <div className="p-2 flex items-center space-x-3">
-                            <h2 onClick={handleColumnHideDisplayCollapse}>
+                        <div className="p-2 flex items-center justify-between" onClick={handleColumnHideDisplayCollapse}>
+                            <h2 >
                                 HIDE COLUMNS
                             </h2>
                             <FiChevronDown className={`w-5 h-5 ${columDisplayCollapse ? "rotate-0" : "-rotate-180"} transition-all duration-300 ease-in`} />
@@ -430,7 +494,7 @@ const Team = () => {
             </div>
 
             {/* USERS TABLE */}
-            <div className="relative 2xl:h-screen 2xl:overflow-x-scroll">
+            <div className="relative h-full overflow-x-scroll">
                 <table className="w-full text-left absolute 2xl:w-[65rem] top-1 xs:top-9">
                     <thead className="dark:bg-blueAccent-600 bg-blueAccent-100 text-light-TXC-400 dark:text-dark-TXC-100">
                         <tr className="p-2">
@@ -493,8 +557,20 @@ const Team = () => {
                     </thead>
                     <tbody>
                         {tableRows}
+                        {!paginationHide && <tr className="relative">
+                            <td className="flex text-sm absolute top-0 right-0 p-2">
+                                <label htmlFor="" className="mr-2">Users Per Page</label>
+                                <select onChange={handleUsersPerPageChange} name="" id="" defaultValue={usersPerPage} className={`${BACK_GRAOUND_COLOR} ${TEXT_COLOR} px-2 mr-3 focus:outline-none`}>
+                                    <option value={5}>5</option>
+                                    <option value={9}>9</option>
+                                </select>
+                                <Pagination usersPerPage={usersPerPage} totalUsers={users.length} paginate={paginate} prevBtn={prevBtn} nextBtn={nextBtn} currentPage={currentPage} />
+                            </td>
+
+                        </tr>}
                     </tbody>
                 </table>
+
             </div>
 
 

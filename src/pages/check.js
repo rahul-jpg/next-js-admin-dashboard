@@ -1,110 +1,57 @@
 import React, { useState } from 'react';
 
 function DataTable() {
-
     const [data, setData] = useState([
-        {
-            name: "rahul",
-            age: '28',
-            occupation: "developer"
-        },
-        {
-            name: "ashish",
-            age: '21',
-            occupation: "chaiwala"
-        },
-        {
-            name: "pinky",
-            age: '12',
-            occupation: "bank"
-        },
+        { id: 1, name: 'John Doe', age: 32 },
+        { id: 2, name: 'Jane Smith', age: 27 },
+        { id: 3, name: 'Bob Johnson', age: 45 },
+        { id: 4, name: 'Alice Lee', age: 29 },
+        { id: 5, name: 'Tom Brown', age: 38 },
+        { id: 6, name: 'Sara Kim', age: 31 },
+        { id: 7, name: 'Mike Chen', age: 22 },
+        { id: 8, name: 'Emily Liu', age: 26 },
+        { id: 9, name: 'David Wang', age: 33 },
+        { id: 10, name: 'Lucy Li', age: 28 },
     ]);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const [filteredData, setFilteredData] = useState(data);
-    const [sortOrder, setSortOrder] = useState('asc');
-    const [selectedRows, setSelectedRows] = useState([]);
-    const [selectAll, setSelectAll] = useState(false);
+    const pageSize = 5; // Number of items per page
 
-    const handleSort = (key) => {
-        const order = sortOrder === 'asc' ? 'desc' : 'asc';
-        const sorted = filteredData.sort((a, b) => {
-            const comparison = a[key].localeCompare(b[key]);
-            return order === 'asc' ? comparison : -comparison;
-        });
-        setFilteredData(sorted);
-        setSortOrder(order);
-    };
+    // Calculate the index of the first and last items on the current page
+    const lastIndex = currentPage * pageSize;
+    const firstIndex = lastIndex - pageSize;
 
-    const handleFilterChange = (event) => {
-        const value = event.target.value.toLowerCase();
-        console.log(value);
-        const filtered = data.filter((item) =>
-            item.name.toLowerCase().includes(value) ||
-            item.age.toString().includes(value) ||
-            item.occupation.toLowerCase().includes(value)
-        );
-        setFilteredData(filtered);
-    };
-
-
-
-    const handleCheckboxChange = (event, row) => {
-        const checked = event.target.checked;
-        if (checked) {
-            setSelectedRows([...selectedRows, row]);
-        } else {
-            setSelectedRows(selectedRows.filter((r) => r.name !== row.name));
-        }
-    };
-
-    const handleSelectAllChange = (event) => {
-        const checked = event.target.checked;
-        if (checked) {
-            setSelectedRows(data);
-            setSelectAll(true);
-        } else {
-            setSelectedRows([]);
-            setSelectAll(false);
-        }
-    };
-
-    const handleDelete = () => {
-        let dataFilter = filteredData.filter(row => selectedRows.every(item => row.name === item.name) === false)
-        setFilteredData(dataFilter)
-        setData(dataFilter)
-        setSelectedRows([])
-    }
-
-
-    const tableRows = filteredData.map((item, index) => {
-        let check = selectedRows.find(row => row.name === item.name)
-        return (<tr key={index}>
-            <td><input type="checkbox" checked={selectAll || check} onChange={(event) => handleCheckboxChange(event, item)} /></td>
-            <td>{item.name}</td>
-            <td>{item.age}</td>
-            <td>{item.occupation}</td>
-        </tr>
-
-        )
-    });
+    // Slice the data array to get only the items on the current page
+    const currentData = data.slice(firstIndex, lastIndex);
 
     return (
-        <div className='bg-white'>
-            <button onClick={handleDelete}>delete</button>
-            <input type="text" onChange={handleFilterChange} placeholder="Filter..." />
+        <div>
             <table>
                 <thead>
                     <tr>
-                        <th><input type="checkbox" checked={selectAll} onChange={handleSelectAllChange} /></th>
-                        <th onClick={() => handleSort('name')}>Name</th>
-                        <th onClick={() => handleSort('age')}>Age</th>
-                        <th onClick={() => handleSort('occupation')}>Occupation</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {tableRows}
+                    {currentData.map((item) => (
+                        <tr key={item.id}>
+                            <td>{item.id}</td>
+                            <td>{item.name}</td>
+                            <td>{item.age}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
+            <div>
+                {currentPage > 1 && (
+                    <button onClick={() => setCurrentPage(currentPage - 1)}>Prev</button>
+                )}
+                {currentPage < Math.ceil(data.length / pageSize) && (
+                    <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+                )}
+            </div>
         </div>
     );
 }
