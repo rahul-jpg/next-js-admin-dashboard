@@ -2,6 +2,7 @@ import { useState } from "react";
 import { teamData } from "../../teamData"
 import { AiFillCaretDown, AiFillDelete, AiOutlineEdit, AiOutlineClose } from 'react-icons/ai';
 import { FiChevronDown } from 'react-icons/fi';
+import { BsDashSquare } from 'react-icons/bs';
 import Pagination from "@/components/Pagination";
 
 const Team = () => {
@@ -9,7 +10,7 @@ const Team = () => {
     // CSS VARIABLES
     const TEXT_COLOR = "text-light-TXC-600 dark:text-dark-TXC-100"
     const BACK_GRAOUND_COLOR = "bg-light-BGSC dark:bg-dark-BGSC"
-    const CHECKBOX = "w-4 h-4 relative after:w-4 after:h-4 after:absolute after:border-[3px] after:rounded-sm rounded-sm after:border-greenAccent-100 after:dark:bg-blueAccent-600 after:bg-blueAccent-100 after:dark:checked:bg-transparent  after:checked:bg-transparent  checked:accent-greenAccent-100"
+
 
     // ALL STATES
     const [users, setUsers] = useState(teamData);
@@ -157,6 +158,10 @@ const Team = () => {
         }
     };
 
+    const handleRemoveSelectAll = () => {
+        if (selectedRows.length > 0 && selectAll === false) setSelectedRows([])
+    }
+
     // FUNCTION FOR DELETE USER
     const handleDeleteUser = () => {
         let dataFilter = users.filter(row => selectedRows.find(item => row.id === item.id) === undefined)
@@ -284,22 +289,7 @@ const Team = () => {
 
     // ONCHANGE FUNCTION FOR CHANGE USER DETAILS
     const handleChangeUserDetails = (e) => {
-        if (e.target.name === "name") {
-            setAddAndUpdateUser(prev => ({ ...prev, name: e.target.value }))
-        }
-        if (e.target.name === "email") {
-            setAddAndUpdateUser(prev => ({ ...prev, email: e.target.value }))
-        }
-        if (e.target.name === "age") {
-            setAddAndUpdateUser(prev => ({ ...prev, age: e.target.value }))
-        }
-        if (e.target.name === "phone") {
-            setAddAndUpdateUser(prev => ({ ...prev, phone: e.target.value }))
-        }
-        if (e.target.name === "access") {
-            setAddAndUpdateUser(prev => ({ ...prev, access: e.target.value }))
-        }
-
+        setAddAndUpdateUser(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
     // USERS TABLE ROWS
@@ -313,7 +303,7 @@ const Team = () => {
 
                 <td className={`p-2`}>
                     <input
-                        className={CHECKBOX}
+                        className={"w-4 h-4 relative after:w-4 after:h-4 after:absolute after:border-[2px] after:rounded-sm rounded-sm after:border-greenAccent-100 after:dark:bg-dark-BGSC after:bg-light-BGSC after:dark:checked:bg-transparent  after:checked:bg-transparent  checked:accent-greenAccent-100"}
                         type="checkbox" checked={selectAll || check}
                         onChange={(event) => handleCheckboxChange(event, item)}
                     />
@@ -347,16 +337,16 @@ const Team = () => {
     });
 
     return (
-        <div className={`w-full px-6 ${TEXT_COLOR} 2xl:text-sm h-screen sm:text-xs sm:px-2 relative`}>
+        <main className={`w-full px-6 ${TEXT_COLOR} 2xl:text-sm sm:text-xs sm:px-2 relative`}>
 
             <div className="grid relative flex-wrap grid-cols-12 gap-2">
 
-                <div className="col-span-3 lg:col-span-8">
+                <div className="col-span-3 lg:col-span-8 flex items-center">
                     {/* SELECT OPTION FOR FILTER USERS */}
                     <select
                         defaultValue="id"
                         onChange={handleFilterByOptionChange}
-                        className={`${BACK_GRAOUND_COLOR} focus:outline-none p-2 w-[30%]`}
+                        className={`${BACK_GRAOUND_COLOR} focus:outline-none p-[0.55rem] w-[30%]`}
                     >
                         <option value="id">
                             Id
@@ -386,7 +376,7 @@ const Team = () => {
                         type="text"
                         onChange={handleFilterChange}
                         placeholder="Filter..."
-                        className={`${BACK_GRAOUND_COLOR} focus:outline-none border-l-2 border-light-TXC-100 p-2 w-[70%]`}
+                        className={`${BACK_GRAOUND_COLOR} focus:outline-none p-2 w-[70%]`}
                     />
                 </div>
 
@@ -406,7 +396,7 @@ const Team = () => {
 
                 {/*SECTION FOR HIDE COLUMNS  */}
                 <div className="col-span-3 lg:col-span-6 relative">
-                    <div className={`absolute z-10 top-0 left-0 ${columDisplayCollapse ? "h-[2.5rem] 2xl:h-[2.25rem] sm:h-[2rem]" : "h-72"} overflow-hidden transition-all duration-300 ease-in cursor-pointer ${BACK_GRAOUND_COLOR} ${TEXT_COLOR} shadow-md w-full`}>
+                    <div className={`absolute z-10 top-0 left-0 ${columDisplayCollapse ? "h-[2.5rem] 2xl:h-[2.25rem] sm:h-[2rem]" : "h-72 shadow-md"} overflow-hidden transition-all duration-300 ease-in cursor-pointer ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}  w-full`}>
 
                         <div className="p-2 flex items-center justify-between" onClick={handleColumnHideDisplayCollapse}>
                             <h2 >
@@ -494,83 +484,87 @@ const Team = () => {
             </div>
 
             {/* USERS TABLE */}
-            <div className="relative h-full overflow-x-scroll">
-                <table className="w-full text-left absolute 2xl:w-[65rem] top-1 xs:top-9">
-                    <thead className="dark:bg-blueAccent-600 bg-blueAccent-100 text-light-TXC-400 dark:text-dark-TXC-100">
-                        <tr className="p-2">
+            <div className="border-2 dark:border-blueAccent-600 border-blueAccent-100 mt-2">
+                <div className="relative w-full 2xl:overflow-x-scroll overflow-y-scroll h-[30rem]">
+                    <table className="w-full text-left absolute 2xl:w-[65rem] xs:top-9">
+                        <thead className="dark:bg-blueAccent-600 bg-blueAccent-100 text-light-TXC-400 dark:text-dark-TXC-100">
+                            <tr className="p-2">
+                                <th className="p-2">
+                                    {
+                                        selectedRows.length > 0 && selectAll === false ?
+                                            <BsDashSquare onClick={handleRemoveSelectAll} className="w-4 h-4 text-greenAccent-400" /> :
+                                            <input
+                                                className={"w-4 h-4 relative after:w-4 after:h-4 after:absolute after:border-[2px] after:rounded-sm rounded-sm after:border-greenAccent-100 after:dark:bg-blueAccent-600 after:bg-blueAccent-100 after:dark:checked:bg-transparent  after:checked:bg-transparent  checked:accent-greenAccent-100"
+                                                }
+                                                type="checkbox"
+                                                checked={selectAll}
+                                                onChange={handleSelectAllChange} />
+                                    }
+                                </th>
 
-                            <th className="p-2">
-                                <input
-                                    className={CHECKBOX}
-                                    type="checkbox"
-                                    checked={selectAll}
-                                    onChange={handleSelectAllChange} />
-                            </th>
+                                <th
+                                    className={`p-2 items-center group ${columnHide.id}`}
+                                    onClick={() => handleSort('id')}
+                                >
+                                    Id
+                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                                </th>
 
-                            <th
-                                className={`p-2 items-center group ${columnHide.id}`}
-                                onClick={() => handleSort('id')}
-                            >
-                                Id
-                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                            </th>
+                                <th
+                                    className={`p-2 ${columnHide.name} group`}
+                                    onClick={() => handleSort('name')}
+                                >
+                                    Name
+                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                                </th>
 
-                            <th
-                                className={`p-2 ${columnHide.name} group`}
-                                onClick={() => handleSort('name')}
-                            >
-                                Name
-                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                            </th>
+                                <th
+                                    className={`p-2 ${columnHide.email} group`}
+                                    onClick={() => handleSort('email')}
+                                >
+                                    Email
+                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                                </th>
 
-                            <th
-                                className={`p-2 ${columnHide.email} group`}
-                                onClick={() => handleSort('email')}
-                            >
-                                Email
-                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                            </th>
+                                <th
+                                    className={`p-2 ${columnHide.age} group`}
+                                    onClick={() => handleSort('age')}
+                                >
+                                    Age
+                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                                </th>
+                                <th className={`p-2 ${columnHide.phone} group`}
+                                    onClick={() => handleSort('phone')}
+                                >
+                                    Phone
+                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                                </th>
 
-                            <th
-                                className={`p-2 ${columnHide.age} group`}
-                                onClick={() => handleSort('age')}
-                            >
-                                Age
-                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                            </th>
-                            <th className={`p-2 ${columnHide.phone} group`}
-                                onClick={() => handleSort('phone')}
-                            >
-                                Phone
-                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                            </th>
+                                <th
+                                    className={`p-2 ${columnHide.access} group`}
+                                    onClick={() => handleSort('access')}
+                                >
+                                    Access
+                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                                </th>
 
-                            <th
-                                className={`p-2 ${columnHide.access} group`}
-                                onClick={() => handleSort('access')}
-                            >
-                                Access
-                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                            </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tableRows}
-                        {!paginationHide && <tr className="relative">
-                            <td className="flex text-sm absolute top-0 right-0 p-2">
-                                <label htmlFor="" className="mr-2">Users Per Page</label>
-                                <select onChange={handleUsersPerPageChange} name="" id="" defaultValue={usersPerPage} className={`${BACK_GRAOUND_COLOR} ${TEXT_COLOR} px-2 mr-3 focus:outline-none`}>
-                                    <option value={5}>5</option>
-                                    <option value={9}>9</option>
-                                </select>
-                                <Pagination usersPerPage={usersPerPage} totalUsers={users.length} paginate={paginate} prevBtn={prevBtn} nextBtn={nextBtn} currentPage={currentPage} />
-                            </td>
-
-                        </tr>}
-                    </tbody>
-                </table>
-
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tableRows}
+                        </tbody>
+                    </table>
+                </div>
+                {
+                    !paginationHide && <div className="flex dark:bg-blueAccent-600 justify-end bg-blueAccent-100 items-center p-2">
+                        <label htmlFor="" className="mr-2">Users Per Page:</label>
+                        <select onChange={handleUsersPerPageChange} name="" id="" defaultValue={usersPerPage} className={`bg-blueAccent-100 dark:bg-blueAccent-600 border-2 border-greenAccent-400 px-2 mr-3 focus:outline-none`}>
+                            <option value={5}>5</option>
+                            <option value={9}>9</option>
+                        </select>
+                        <Pagination usersPerPage={usersPerPage} totalUsers={users.length} paginate={paginate} prevBtn={prevBtn} nextBtn={nextBtn} currentPage={currentPage} />
+                    </div>
+                }
             </div>
 
 
@@ -643,7 +637,7 @@ const Team = () => {
                 </button>
 
             </form>
-        </div>
+        </main>
     )
 }
 
