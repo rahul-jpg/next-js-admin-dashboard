@@ -19,7 +19,7 @@ export default function Home() {
   const BACK_GRAOUND_COLOR = "bg-light-BGSC dark:bg-dark-BGSC"
   return (
     <>
-      <main className="px-6 xs:px-2">
+      <main className="px-6 xs:px-2 w-full">
         <div className='flex justify-between'>
           <div>
             <h1 className={`text-3xl font-bold ${TEXT_COLOR} md:text-2xl sm:text-xl`}>DASHBOARD</h1>

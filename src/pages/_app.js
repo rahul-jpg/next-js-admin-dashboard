@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
       <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
         <main className={`${montserrat.variable} flex bg-light-BGC dark:bg-dark-BGC`}>
           <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-          <div className={'w-full'}>
+          <div className={`${isOpen ? "w-[85%] md:w-[100%]" : "w-[97%] md:w-[100%] md:ml-[4rem] sm:ml-0"} overflow-hidden`}>
             <Topbar />
             <Component {...pageProps} />
           </div>

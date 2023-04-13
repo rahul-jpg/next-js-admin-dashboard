@@ -25,12 +25,15 @@ const Team = () => {
     const [selectedRows, setSelectedRows] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
     const [columnHide, setColumnHide] = useState({
-        id: '',
-        name: '',
-        email: '',
-        phone: '',
-        access: '',
-        age: ''
+        id: false,
+        name: false,
+        email: false,
+        phone: false,
+        access: false,
+        age: false,
+        city: true,
+        address: true,
+        zipcode: true
     });
     const [columDisplayCollapse, setColumDisplayCollapse] = useState(true);
     const [filterByOptions, setFilterByOptions] = useState("id");
@@ -41,7 +44,10 @@ const Team = () => {
         email: '',
         phone: '',
         access: '',
-        age: ''
+        age: '',
+        address: '',
+        city: '',
+        zipcode: ''
     });
     const [changeBtnBehavior, setChangeBtnBehavior] = useState("");
 
@@ -122,7 +128,10 @@ const Team = () => {
                     item.email.toLowerCase().includes(value) ||
                     item.age.toString().includes(value) ||
                     item.phone.toString().includes(value) ||
-                    item.access.toLowerCase().includes(value)
+                    item.access.toLowerCase().includes(value) ||
+                    item.city.toLowerCase().includes(value) ||
+                    item.address.toLowerCase().includes(value) ||
+                    item.zipcode.toLowerCase().includes(value)
             } else {
                 return item[filterByOptions].toString().toLowerCase().includes(value)
             }
@@ -173,57 +182,10 @@ const Team = () => {
 
     // ONCHANGE FUNCTION FOR HIDE COLUMNS
     const handleColumnHideChange = (e) => {
-        if (e.target.name === "id") {
-            if (e.target.checked === true) {
-                setColumnHide(prev => ({ ...prev, id: "hidden" }))
-            } else {
-                setColumnHide(prev => ({ ...prev, id: "" }))
-            }
-        }
-
-        if (e.target.name === "name") {
-            if (e.target.checked === true) {
-                setColumnHide(prev => ({ ...prev, name: "hidden" }))
-            } else {
-                setColumnHide(prev => ({ ...prev, name: "" }))
-            }
-        }
-
-        if (e.target.name === "email") {
-            if (e.target.checked === true) {
-                setColumnHide(prev => ({ ...prev, email: "hidden" }))
-            } else {
-                setColumnHide(prev => ({ ...prev, email: "" }))
-            }
-        }
-
-        if (e.target.name === "id") {
-            if (e.target.checked === true) {
-                setColumnHide(prev => ({ ...prev, phone: "hidden" }))
-            } else {
-                setColumnHide(prev => ({ ...prev, phone: "" }))
-            }
-        }
-        if (e.target.name === "access") {
-            if (e.target.checked === true) {
-                setColumnHide(prev => ({ ...prev, access: "hidden" }))
-            } else {
-                setColumnHide(prev => ({ ...prev, access: "" }))
-            }
-        }
-        if (e.target.name === "age") {
-            if (e.target.checked === true) {
-                setColumnHide(prev => ({ ...prev, age: "hidden" }))
-            } else {
-                setColumnHide(prev => ({ ...prev, age: "" }))
-            }
-        }
-        if (e.target.name === "phone") {
-            if (e.target.checked === true) {
-                setColumnHide(prev => ({ ...prev, phone: "hidden" }))
-            } else {
-                setColumnHide(prev => ({ ...prev, phone: "" }))
-            }
+        if (e.target.checked === true) {
+            setColumnHide(prev => ({ ...prev, [e.target.name]: true }))
+        } else {
+            setColumnHide(prev => ({ ...prev, [e.target.name]: false }))
         }
     }
 
@@ -282,7 +244,10 @@ const Team = () => {
             email: '',
             phone: '',
             access: '',
-            age: ''
+            age: '',
+            city: '',
+            address: '',
+            zipcode: '',
         })
     }
 
@@ -303,27 +268,36 @@ const Team = () => {
 
                 <td className={`p-2`}>
                     <input
-                        className={"w-4 h-4 relative after:w-4 after:h-4 after:absolute after:border-[2px] after:rounded-sm rounded-sm after:border-greenAccent-100 after:dark:bg-dark-BGSC after:bg-light-BGSC after:dark:checked:bg-transparent  after:checked:bg-transparent  checked:accent-greenAccent-100"}
+                        className={"w-4 h-4 relative after:w-4 after:h-4 after:absolute after:border-[2px] after:rounded-sm rounded-sm after:dark:border-dark-TXC-100 after:border-light-TXC-100 after:dark:bg-dark-BGSC after:bg-light-BGSC after:dark:checked:bg-transparent  after:checked:bg-transparent  checked:accent-greenAccent-100"}
                         type="checkbox" checked={selectAll || check}
                         onChange={(event) => handleCheckboxChange(event, item)}
                     />
                 </td>
-                <td className={`p-2 ${columnHide.id}`}>
+                <td className={`p-2 ${columnHide.id ? "hidden" : ""}`}>
                     {item.id}
                 </td>
-                <td className={`p-2 ${columnHide.name}`}>
+                <td className={`p-2 ${columnHide.name ? "hidden" : ""}`}>
                     {item.name}
                 </td>
-                <td className={`p-2 ${columnHide.email}`}>
+                <td className={`p-2 ${columnHide.email ? "hidden" : ""}`}>
                     {item.email}
                 </td>
-                <td className={`p-2 ${columnHide.age}`}>
+                <td className={`p-2 ${columnHide.age ? "hidden" : ""}`}>
                     {item.age}
                 </td>
-                <td className={`p-2 ${columnHide.phone}`}>
+                <td className={`p-2 ${columnHide.phone ? "hidden" : ""}`}>
                     {item.phone}
                 </td>
-                <td className={`p-2 ${columnHide.access}  uppercase font-semibold`}>
+                <td className={`p-2 ${columnHide.city ? "hidden" : ""}`}>
+                    {item.city}
+                </td>
+                <td className={`p-2 ${columnHide.address ? "hidden" : ""}`}>
+                    {item.address}
+                </td>
+                <td className={`p-2 ${columnHide.zipcode ? "hidden" : ""}`}>
+                    {item.zipcode}
+                </td>
+                <td className={`p-2 ${columnHide.access ? "hidden" : ""}  uppercase font-semibold`}>
                     {item.access}
                     <AiOutlineEdit
                         id={item.id}
@@ -341,12 +315,12 @@ const Team = () => {
 
             <div className="grid relative flex-wrap grid-cols-12 gap-2">
 
-                <div className="col-span-3 lg:col-span-8 flex items-center">
+                <div className="col-span-3 lg:col-span-8 flex items-end">
                     {/* SELECT OPTION FOR FILTER USERS */}
                     <select
                         defaultValue="id"
                         onChange={handleFilterByOptionChange}
-                        className={`${BACK_GRAOUND_COLOR} focus:outline-none p-[0.55rem] w-[30%]`}
+                        className={`bg-dark-BGC focus:outline-none border-b-2 border-[#1F2A40] p-2 w-[30%]`}
                     >
                         <option value="id">
                             Id
@@ -366,6 +340,15 @@ const Team = () => {
                         <option value="access">
                             Access
                         </option>
+                        <option value="city">
+                            City
+                        </option>
+                        <option value="address">
+                            Address
+                        </option>
+                        <option value="zipcode">
+                            Zipcode
+                        </option>
                         <option value="all">
                             All
                         </option>
@@ -376,7 +359,7 @@ const Team = () => {
                         type="text"
                         onChange={handleFilterChange}
                         placeholder="Filter..."
-                        className={`${BACK_GRAOUND_COLOR} focus:outline-none p-2 w-[70%]`}
+                        className={`bg-dark-BGC border-b-2 border-[#1F2A40] focus:outline-none p-2 w-[70%]`}
                     />
                 </div>
 
@@ -396,7 +379,7 @@ const Team = () => {
 
                 {/*SECTION FOR HIDE COLUMNS  */}
                 <div className="col-span-3 lg:col-span-6 relative">
-                    <div className={`absolute z-10 top-0 left-0 ${columDisplayCollapse ? "h-[2.5rem] 2xl:h-[2.25rem] sm:h-[2rem]" : "h-72 shadow-md"} overflow-hidden transition-all duration-300 ease-in cursor-pointer ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}  w-full`}>
+                    <div className={`absolute z-10 top-0 left-0 ${columDisplayCollapse ? "h-[2.5rem] 2xl:h-[2.25rem] sm:h-[2rem]" : "h-96 shadow-md"} overflow-hidden transition-all duration-300 ease-in cursor-pointer ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}  w-full`}>
 
                         <div className="p-2 flex items-center justify-between" onClick={handleColumnHideDisplayCollapse}>
                             <h2 >
@@ -412,7 +395,9 @@ const Team = () => {
                                     className={`w-5 h-5`}
                                     name="id"
                                     onChange={handleColumnHideChange}
-                                    type="checkbox" />
+                                    checked={columnHide.id}
+                                    type="checkbox"
+                                />
                                 <label htmlFor="">
                                     Id
                                 </label>
@@ -423,7 +408,9 @@ const Team = () => {
                                     className={`w-5 h-5`}
                                     name="name"
                                     onChange={handleColumnHideChange}
-                                    type="checkbox" />
+                                    type="checkbox"
+                                    checked={columnHide.name}
+                                />
                                 <label htmlFor="">
                                     Name
                                 </label>
@@ -434,7 +421,9 @@ const Team = () => {
                                     className={`w-5 h-5`}
                                     name="age"
                                     onChange={handleColumnHideChange}
-                                    type="checkbox" />
+                                    type="checkbox"
+                                    checked={columnHide.age}
+                                />
                                 <label htmlFor="">
                                     Age
                                 </label>
@@ -445,7 +434,9 @@ const Team = () => {
                                     className={`w-5 h-5`}
                                     name="email"
                                     onChange={handleColumnHideChange}
-                                    type="checkbox" />
+                                    type="checkbox"
+                                    checked={columnHide.email}
+                                />
                                 <label htmlFor="">
                                     Email
                                 </label>
@@ -458,6 +449,7 @@ const Team = () => {
                                     name="phone"
                                     onChange={handleColumnHideChange}
                                     type="checkbox"
+                                    checked={columnHide.phone}
                                 />
                                 <label htmlFor="">
                                     Phone
@@ -471,9 +463,46 @@ const Team = () => {
                                     name="access"
                                     onChange={handleColumnHideChange}
                                     type="checkbox"
+                                    checked={columnHide.access}
                                 />
                                 <label htmlFor="">
                                     Access
+                                </label>
+                            </li>
+                            <li className="flex space-x-5 items-center">
+                                <input
+                                    className={`w-5 h-5`}
+                                    name="city"
+                                    onChange={handleColumnHideChange}
+                                    type="checkbox"
+                                    checked={columnHide.city}
+                                />
+                                <label htmlFor="">
+                                    City
+                                </label>
+                            </li>
+                            <li className="flex space-x-5 items-center">
+                                <input
+                                    className={`w-5 h-5`}
+                                    name="address"
+                                    onChange={handleColumnHideChange}
+                                    type="checkbox"
+                                    checked={columnHide.address}
+                                />
+                                <label htmlFor="">
+                                    Address
+                                </label>
+                            </li>
+                            <li className="flex space-x-5 items-center">
+                                <input
+                                    className={`w-5 h-5`}
+                                    name="zipcode"
+                                    onChange={handleColumnHideChange}
+                                    type="checkbox"
+                                    checked={columnHide.zipcode}
+                                />
+                                <label htmlFor="">
+                                    Zipcode
                                 </label>
                             </li>
 
@@ -484,89 +513,104 @@ const Team = () => {
             </div>
 
             {/* USERS TABLE */}
-            <div className="border-2 dark:border-blueAccent-600 border-blueAccent-100 mt-2">
-                <div className="relative w-full 2xl:overflow-x-scroll overflow-y-scroll h-[30rem]">
-                    <table className="w-full text-left absolute 2xl:w-[65rem] xs:top-9">
-                        <thead className="dark:bg-blueAccent-600 bg-blueAccent-100 text-light-TXC-400 dark:text-dark-TXC-100">
-                            <tr className="p-2">
-                                <th className="p-2">
-                                    {
-                                        selectedRows.length > 0 && selectAll === false ?
-                                            <BsDashSquare onClick={handleRemoveSelectAll} className="w-4 h-4 text-greenAccent-400" /> :
-                                            <input
-                                                className={"w-4 h-4 relative after:w-4 after:h-4 after:absolute after:border-[2px] after:rounded-sm rounded-sm after:border-greenAccent-100 after:dark:bg-blueAccent-600 after:bg-blueAccent-100 after:dark:checked:bg-transparent  after:checked:bg-transparent  checked:accent-greenAccent-100"
-                                                }
-                                                type="checkbox"
-                                                checked={selectAll}
-                                                onChange={handleSelectAllChange} />
-                                    }
-                                </th>
+            <div className="border-2 dark:border-blueAccent-600 max-h-[20rem] border-blueAccent-100 mt-2 overflow-scroll">
+                <table className="text-left w-full min-w-[50rem]">
+                    <thead className="dark:bg-blueAccent-600 bg-blueAccent-100 text-light-TXC-400 dark:text-dark-TXC-100">
+                        <tr className="p-2">
+                            <th className="p-2">
+                                {
+                                    selectedRows.length > 0 && selectAll === false ?
+                                        <BsDashSquare onClick={handleRemoveSelectAll} className="w-4 h-4 dark:text-dark-TXC-100 text-light-TXC-100" /> :
+                                        <input
+                                            className={"w-4 h-4 relative after:w-4 after:h-4 after:absolute after:border-[2px] after:rounded-sm rounded-sm after:dark:border-dark-TXC-100 after:border-light-TXC-100 after:dark:bg-blueAccent-600 after:bg-blueAccent-100 after:dark:checked:bg-transparent  after:checked:bg-transparent  checked:accent-greenAccent-100"
+                                            }
+                                            type="checkbox"
+                                            checked={selectAll}
+                                            onChange={handleSelectAllChange} />
+                                }
+                            </th>
 
-                                <th
-                                    className={`p-2 items-center group ${columnHide.id}`}
-                                    onClick={() => handleSort('id')}
-                                >
-                                    Id
-                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                                </th>
+                            <th
+                                className={`p-2 items-center group ${columnHide.id ? "hidden" : ""}`}
+                                onClick={() => handleSort('id')}
+                            >
+                                Id
+                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                            </th>
 
-                                <th
-                                    className={`p-2 ${columnHide.name} group`}
-                                    onClick={() => handleSort('name')}
-                                >
-                                    Name
-                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                                </th>
+                            <th
+                                className={`p-2 ${columnHide.name ? "hidden" : ""} group`}
+                                onClick={() => handleSort('name')}
+                            >
+                                Name
+                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                            </th>
 
-                                <th
-                                    className={`p-2 ${columnHide.email} group`}
-                                    onClick={() => handleSort('email')}
-                                >
-                                    Email
-                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                                </th>
+                            <th
+                                className={`p-2 ${columnHide.email ? "hidden" : ""} group`}
+                                onClick={() => handleSort('email')}
+                            >
+                                Email
+                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                            </th>
 
-                                <th
-                                    className={`p-2 ${columnHide.age} group`}
-                                    onClick={() => handleSort('age')}
-                                >
-                                    Age
-                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                                </th>
-                                <th className={`p-2 ${columnHide.phone} group`}
-                                    onClick={() => handleSort('phone')}
-                                >
-                                    Phone
-                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                                </th>
+                            <th
+                                className={`p-2 ${columnHide.age ? "hidden" : ""} group`}
+                                onClick={() => handleSort('age')}
+                            >
+                                Age
+                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                            </th>
+                            <th className={`p-2 ${columnHide.phone ? "hidden" : ""} group`}
+                                onClick={() => handleSort('phone')}
+                            >
+                                Phone
+                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                            </th>
+                            <th className={`p-2 ${columnHide.city ? "hidden" : ""} group`}
+                                onClick={() => handleSort('city')}
+                            >
+                                City
+                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                            </th>
+                            <th className={`p-2 ${columnHide.address ? "hidden" : ""} group`}
+                                onClick={() => handleSort('address')}
+                            >
+                                Address
+                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                            </th>
+                            <th className={`p-2 ${columnHide.zipcode ? "hidden" : ""} group`}
+                                onClick={() => handleSort('zipcode')}
+                            >
+                                Zipcode
+                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                            </th>
 
-                                <th
-                                    className={`p-2 ${columnHide.access} group`}
-                                    onClick={() => handleSort('access')}
-                                >
-                                    Access
-                                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                                </th>
+                            <th
+                                className={`p-2 ${columnHide.access ? "hidden" : ""} group`}
+                                onClick={() => handleSort('access')}
+                            >
+                                Access
+                                <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+                            </th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tableRows}
-                        </tbody>
-                    </table>
-                </div>
-                {
-                    !paginationHide && <div className="flex dark:bg-blueAccent-600 justify-end bg-blueAccent-100 items-center p-2">
-                        <label htmlFor="" className="mr-2">Users Per Page:</label>
-                        <select onChange={handleUsersPerPageChange} name="" id="" defaultValue={usersPerPage} className={`bg-blueAccent-100 dark:bg-blueAccent-600 border-2 border-greenAccent-400 px-2 mr-3 focus:outline-none`}>
-                            <option value={5}>5</option>
-                            <option value={9}>9</option>
-                        </select>
-                        <Pagination usersPerPage={usersPerPage} totalUsers={users.length} paginate={paginate} prevBtn={prevBtn} nextBtn={nextBtn} currentPage={currentPage} />
-                    </div>
-                }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableRows}
+                    </tbody>
+                </table>
             </div>
-
+            {
+                !paginationHide && <div className="flex dark:bg-blueAccent-600 justify-end bg-blueAccent-100 items-center p-2">
+                    <label htmlFor="" className="mr-2">Users Per Page:</label>
+                    <select onChange={handleUsersPerPageChange} name="" id="" defaultValue={usersPerPage} className={`bg-blueAccent-100 dark:bg-blueAccent-600 border-2 dark:border-dark-TXC-100 border-light-TXC-100 px-2 mr-3 focus:outline-none`}>
+                        <option value={5}>5</option>
+                        <option value={9}>9</option>
+                    </select>
+                    <Pagination usersPerPage={usersPerPage} totalUsers={users.length} paginate={paginate} prevBtn={prevBtn} nextBtn={nextBtn} currentPage={currentPage} />
+                </div>
+            }
 
             {/* FORM FOR UPDATE OR ADD USER */}
             <form className={`${addAndUpdateUserModalToggle ? "translate-y-0" : "-translate-y-[30rem]"} w-[50%] shadow-md transition-all duration-300 ease-in absolute top-[0] lg:translate-x-0 lg:left-[20%] sm:left-[15%] xs:left-[5%] translate-x-[50%] flex flex-col space-y-4 bg-light-BGC p-4 xs:p-2 overflow-hidden dark:bg-dark-BGC xs:w-[90%] sm:w-[70%] lg:w-[60%] z-10`}>
@@ -575,60 +619,84 @@ const Team = () => {
                     className="w-5 h-5 cursor-pointer"
                     onClick={handleAddAndUpdateUserModalClose}
                 />
+                <div className="h-[15rem] overflow-y-scroll flex flex-col space-y-4 w-full">
+                    <input
+                        onChange={handleChangeUserDetails}
+                        value={addAndUpdateUser.name}
+                        type="text"
+                        placeholder="Name"
+                        name="name"
+                        className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
+                    />
 
-                <input
-                    onChange={handleChangeUserDetails}
-                    value={addAndUpdateUser.name}
-                    type="text"
-                    placeholder="Name"
-                    name="name"
-                    className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
-                />
+                    <input
+                        onChange={handleChangeUserDetails}
+                        value={addAndUpdateUser.email}
+                        type="email"
+                        placeholder="Email"
+                        name="email"
+                        className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
+                    />
 
-                <input
-                    onChange={handleChangeUserDetails}
-                    value={addAndUpdateUser.email}
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
-                />
+                    <input
+                        onChange={handleChangeUserDetails}
+                        value={addAndUpdateUser.age}
+                        type="text"
+                        placeholder="Age"
+                        name="age"
+                        className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
+                    />
 
-                <input
-                    onChange={handleChangeUserDetails}
-                    value={addAndUpdateUser.age}
-                    type="text"
-                    placeholder="Age"
-                    name="age"
-                    className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
-                />
+                    <input
+                        onChange={handleChangeUserDetails}
+                        value={addAndUpdateUser.phone}
+                        type="text"
+                        placeholder="Phone"
+                        name="phone"
+                        className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
+                    />
+                    <input
+                        onChange={handleChangeUserDetails}
+                        value={addAndUpdateUser.phone}
+                        type="text"
+                        placeholder="Address"
+                        name="address"
+                        className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
+                    />
+                    <input
+                        onChange={handleChangeUserDetails}
+                        value={addAndUpdateUser.phone}
+                        type="text"
+                        placeholder="City"
+                        name="city"
+                        className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
+                    />
+                    <input
+                        onChange={handleChangeUserDetails}
+                        value={addAndUpdateUser.zipcode}
+                        type="text"
+                        placeholder="Zipcode"
+                        name="zipcode"
+                        className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
+                    />
 
-                <input
-                    onChange={handleChangeUserDetails}
-                    value={addAndUpdateUser.phone}
-                    type="text"
-                    placeholder="Phone"
-                    name="phone"
-                    className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
-                />
-
-                <select
-                    onChange={handleChangeUserDetails}
-                    name="access"
-                    defaultValue={addAndUpdateUser.access}
-                    className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
-                >
-                    <option value="user">
-                        User
-                    </option>
-                    <option value="admin">
-                        Admin
-                    </option>
-                    <option value="manager">
-                        Manager
-                    </option>
-                </select>
-
+                    <select
+                        onChange={handleChangeUserDetails}
+                        name="access"
+                        defaultValue={addAndUpdateUser.access}
+                        className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
+                    >
+                        <option value="user">
+                            User
+                        </option>
+                        <option value="admin">
+                            Admin
+                        </option>
+                        <option value="manager">
+                            Manager
+                        </option>
+                    </select>
+                </div>
                 <button
                     onClick={changeBtnBehavior === "UPDATE" ? handleUpdateUser : handleAddNewUser}
                     className={`p-2 focus:outline-none ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}`}
