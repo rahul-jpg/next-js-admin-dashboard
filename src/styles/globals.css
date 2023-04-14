@@ -32,46 +32,8 @@
     }
   }
 
-  @media(max-width:850px){
+  @media (max-width:330px){
     .fc{
       font-size: .8em;
     }
-  
-    .fc .fc-toolbar-title{
-      font-size: 1.5em;
-    }
   }
-
-  @media(max-width:440px){
-    .fc{
-      font-size: .7em;
-    }
-
-    .fc .fc-button{
-      padding: .3em .45em;
-    }
-  
-    .fc .fc-toolbar-title{
-      font-size: 1.4em;
-    }
-  }
-
-  @media(max-width:330px){
-    .fc{
-      font-size: .6em;
-    }
-  }
-
-@media(max-width:290Px){
-  .fc{
-    font-size: .6em;
-  }
-
-  .fc .fc-button{
-    padding: .2em .25em;
-  }
-
-  .fc .fc-toolbar-title{
-    font-size: 1.3em;
-  }
-}
