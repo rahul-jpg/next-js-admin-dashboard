@@ -40,34 +40,37 @@ const Calendar = () => {
     currentEvents.map(event => console.log(event.start))
 
     return (
-        <div className="w-full px-4">
+        <div className="w-full px-4 xs:px-2">
             <Header title="Calendar" description="Full Calendar Interactive Page" />
             <div className="flex w-full space-x-4 md:flex-col md:space-x-0">
                 {/* CALENDAR SIDEBAR */}
-                <div className={`w-[15%] ${BACK_GRAOUND_COLOR} p-4 ${TEXT_COLOR} text-sm min-w-[11rem] md:w-full md:p-2 sm:text-xs`}>
+                <div className={`w-[15%] ${BACK_GRAOUND_COLOR} p-4 ${TEXT_COLOR} text-sm min-w-[11rem] md:w-full md:p-2 sm:text-xs sm:p-1`}>
                     <h5>Events</h5>
-                    <ul className="flex flex-col space-y-2 p-2 md:flex-row md:space-y-0 md:space-x-2">
-                        {currentEvents.map((event) => (
-                            <li
-                                key={event.id}
-                                className="bg-greenAccent-400 p-4 rounded-md md:p-2"
-                            >
-                                <h2>{event.title}</h2>
-                                <p>
-                                    {formatDate(event.start, {
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                    })}
-                                </p>
+                    <div className="md:overflow-x-scroll">
+                        <ul className="flex flex-col space-y-2 p-2 md:flex-row md:space-y-0 md:space-x-2">
+                            {currentEvents.map((event) => (
+                                <li
+                                    key={event.id}
+                                    className="bg-greenAccent-400 p-4 rounded-md md:p-2 sm:p-1 sm:rounded-sm min-w-[5rem]"
+                                >
+                                    <h2>{event.title}</h2>
+                                    <p>
+                                        {formatDate(event.start, {
+                                            year: "numeric",
+                                            month: "short",
+                                            day: "numeric",
+                                        })}
+                                    </p>
 
-                            </li>
-                        ))}
-                    </ul>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
                 </div>
 
                 {/* CALENDAR */}
-                <div className={`${TEXT_COLOR} w-[85%] md:w-full`}>
+                <div className={`${TEXT_COLOR} w-[85%] md:w-full mt-3`}>
                     <FullCalendar
                         height="75vh"
                         plugins={[

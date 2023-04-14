@@ -32,77 +32,46 @@
     }
   }
 
-  @media(max-width:800px){
-    .fc .fc-button{
-      padding: .1rem .3rem;
-      font-size: .9rem;
-    }
-
-    .fc .fc-toolbar-title{
-      font-size: 1.7rem;
-    }
-  }
-
-  @media(max-width:700px){
-    .fc .fc-button{
-      padding: .1rem .3rem;
-    }
-
-    .fc .fc-toolbar-title{
-      font-size: 1.5rem;
-    }
-  }
-
-  @media(max-width:500px){
-    .fc .fc-button{
-      /* font-size: .7rem; */
-      padding: .1rem .2rem;
-    }
-
-    .fc .fc-toolbar-title{
-      font-size: 1.3rem;
-    }
-  }
-
-  @media(max-width:430px){
-    .fc .fc-button{
-      font-size: .7rem;
-      padding: .1rem .2rem;
-    }
-
-    .fc .fc-toolbar-title{
-      font-size: 1.2rem;
-    }
-  }
-
-  @media(max-width:370px){
-    .fc .fc-toolbar-title{
-      font-size: .85rem;
-    }
-    .fc .fc-button{
-      font-size: .7rem;
-      padding: .1rem .15rem;
-    }
-
-    .fc table {
-      font-size: .7rem;
-    }
-  
-    .fc-scrollgrid-sync-table{
-      height: 1rem !important;
-    }
-  
+  @media(max-width:850px){
     .fc{
-      height: 40vh !important;
+      font-size: .8em;
+    }
+  
+    .fc .fc-toolbar-title{
+      font-size: 1.5em;
+    }
+  }
+
+  @media(max-width:440px){
+    .fc{
+      font-size: .7em;
+    }
+
+    .fc .fc-button{
+      padding: .3em .45em;
+    }
+  
+    .fc .fc-toolbar-title{
+      font-size: 1.4em;
     }
   }
 
   @media(max-width:330px){
-    .fc .fc-toolbar-title{
-      font-size: .7rem;
-    }
-    .fc .fc-button{
-      font-size: .6rem;
-      padding: .1rem .1rem;
+    .fc{
+      font-size: .6em;
     }
   }
+
+@media(max-width:290Px){
+  .fc{
+    font-size: .6em;
+  }
+
+  .fc .fc-button{
+    padding: .2em .25em;
+  }
+
+  .fc .fc-toolbar-title{
+    font-size: 1.3em;
+  }
+}
