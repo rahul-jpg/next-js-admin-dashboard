@@ -19,7 +19,7 @@ const TableTools = ({
                 <select
                     defaultValue="id"
                     onChange={handleFilterByOptionChange}
-                    className={`bg-dark-BGC focus:outline-none border-b-2 border-[#1F2A40] p-2 w-[30%]`}
+                    className={`dark:bg-dark-BGC bg-light-BGC focus:outline-none border-b-2 dark:border-[#1F2A40] border-dark-TXC-600 p-2 w-[30%]`}
                 >
                     <option value="id">
                         Id
@@ -58,7 +58,7 @@ const TableTools = ({
                     type="text"
                     onChange={handleFilterChange}
                     placeholder="Filter..."
-                    className={`bg-dark-BGC border-b-2 border-[#1F2A40] focus:outline-none p-2 w-[70%]`}
+                    className={`dark:bg-dark-BGC bg-light-BGC border-b-2 dark:border-[#1F2A40] border-dark-TXC-600 focus:outline-none p-2 w-[70%]`}
                 />
             </div>
 
@@ -78,7 +78,7 @@ const TableTools = ({
 
             {/*SECTION FOR HIDE COLUMNS  */}
             <div className="col-span-3 lg:col-span-6 relative">
-                <div className={`absolute z-10 top-0 left-0 ${columDisplayCollapse ? "h-[2.5rem] 2xl:h-[2.25rem] sm:h-[2rem]" : "h-96 shadow-md"} overflow-hidden transition-all duration-300 ease-in cursor-pointer ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}  w-full`}>
+                <div className={`absolute z-10 top-0 left-0 ${columDisplayCollapse ? "max-h-[2.5rem] 2xl:max-h-[2.25rem] sm:max-h-[2rem]" : "max-h-96 shadow-md"} overflow-hidden transition-all duration-300 ease-in cursor-pointer ${BACK_GRAOUND_COLOR} ${TEXT_COLOR}  w-full`}>
 
                     <div className="p-2 flex items-center justify-between" onClick={handleColumnHideDisplayCollapse}>
                         <h2 >

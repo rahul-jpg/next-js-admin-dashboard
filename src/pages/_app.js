@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import { Montserrat } from "next/font/google"
 import Head from 'next/head'
-import Sidebar from '../components/Sidebar'
+import Sidebar from '../components/sideBar/Sidebar'
 import Topbar from '@/components/Topbar'
 import { useEffect, useState } from 'react'
 import ThemeContext from '@/context/themeContext'
@@ -29,8 +29,10 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
         <main className={`${montserrat.variable} flex bg-light-BGC dark:bg-dark-BGC`}>
-          <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-          <div className={`${isOpen ? "w-[85%] md:w-[100%]" : "w-[97%] md:w-[100%] md:ml-[4rem] sm:ml-0"} overflow-hidden`}>
+          <div className={`${isOpen ? "w-[16rem] min-w-[16rem] xs:w-[14rem]" : "w-[4rem] min-w-[4rem] sm:w-16"} md:fixed z-20 h-screen`}>
+            <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+          </div>
+          <div className={`${isOpen ? "w-[85%] md:w-[100%]" : "w-[97%] md:w-[100%] md:ml-[4rem] sm:ml-0"} overflow-x-hidden overflow-y-scroll h-screen`}>
             <Topbar />
             <Component {...pageProps} />
           </div>

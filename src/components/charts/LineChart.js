@@ -2,7 +2,7 @@ import ThemeContext from '@/context/themeContext'
 import { ResponsiveLine } from '@nivo/line'
 import { useContext } from 'react'
 
-const MyResponsiveLine = ({ data }) => {
+const LineChart = ({ data }) => {
     const { themeMode } = useContext(ThemeContext)
 
     return (
@@ -108,5 +108,5 @@ const MyResponsiveLine = ({ data }) => {
     )
 }
 
-export default MyResponsiveLine
+export default LineChart
 

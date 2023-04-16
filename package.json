@@ -19,6 +19,7 @@
     "@nivo/core": "^0.80.0",
     "@nivo/geo": "^0.80.0",
     "@nivo/line": "^0.80.0",
+    "@nivo/pie": "^0.80.0",
     "autoprefixer": "10.4.14",
     "framer-motion": "^10.11.2",
     "next": "13.3.0",

@@ -257,25 +257,8 @@ const Team = () => {
         setAddAndUpdateUser(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    // USERS TABLE ROWS
-    const tableRows = filteredUsers.map((item, index) => {
-        let check = selectedRows.find(row => row.id === item.id)
-        return (
-            <TableBody
-                index={index}
-                selectAll={selectAll}
-                check={check}
-                item={item}
-                columnHide={columnHide}
-                handelOpenModalForUpdateUser={handelOpenModalForUpdateUser}
-                handleCheckboxChange={handleCheckboxChange}
-            />
-
-        )
-    });
-
     return (
-        <main className={`w-full px-6 ${TEXT_COLOR} 2xl:text-sm sm:text-xs sm:px-2 relative`}>
+        <main className={`w-full px-6 ${TEXT_COLOR} 2xl:text-sm sm:text-xs sm:px-2 relative h-[80vh]`}>
 
             <Header title="TEAM" description="Managing the Team Members" />
 
@@ -298,8 +281,10 @@ const Team = () => {
                 handleSelectAllChange={handleSelectAllChange}
                 columnHide={columnHide}
                 sortOrder={sortOrder}
-                tableRows={tableRows}
                 handleSort={handleSort}
+                handelOpenModalForUpdateUser={handelOpenModalForUpdateUser}
+                handleCheckboxChange={handleCheckboxChange}
+                filteredUsers={filteredUsers}
             />
             {
                 !paginationHide && <div className="flex dark:bg-blueAccent-600 justify-end bg-blueAccent-100 items-center p-2">

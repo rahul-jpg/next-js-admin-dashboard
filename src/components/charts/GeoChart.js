@@ -1,7 +1,7 @@
 import { ResponsiveChoropleth } from '@nivo/geo'
-import { geoFeatures } from "../../geoFeature"
+import { geoFeatures } from "../../../geoFeature"
 
-const MyResponsiveGeo = ({ data }) => {
+const GeoChart = ({ data }) => {
     return (
         <ResponsiveChoropleth
             data={data}
@@ -103,4 +103,4 @@ const MyResponsiveGeo = ({ data }) => {
         />
     )
 }
-export default MyResponsiveGeo
+export default GeoChart

@@ -2,7 +2,7 @@ import ThemeContext from '@/context/themeContext'
 import { ResponsiveBar } from '@nivo/bar'
 import { useContext } from 'react'
 
-const MyResponsiveBar = ({ data }) => {
+const BarChart = ({ data }) => {
     const { themeMode } = useContext(ThemeContext)
     return (
         < ResponsiveBar
@@ -34,8 +34,6 @@ const MyResponsiveBar = ({ data }) => {
                         fill: themeMode === "dark" ? "#e0e0e0" : "#141414",
                     },
                 },
-
-
             }}
             keys={
                 [
@@ -158,4 +156,4 @@ const MyResponsiveBar = ({ data }) => {
 
 }
 
-export default MyResponsiveBar
+export default BarChart

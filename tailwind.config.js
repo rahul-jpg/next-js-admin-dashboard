@@ -21,6 +21,16 @@ module.exports = {
         light: {
           BGC: "#fcfcfc",
           BGSC: "#f2f0f0"
+        },
+        blackAccent: {
+          400: "#3d3d3d",
+          600: "#141414",
+          100: "rgba(0, 0, 0, 0.54)"
+        },
+        whiteAccent: {
+          100: "#e0e0e0",
+          400: "rgb(224, 224, 224)",
+          600: "#a3a3a3"
         }
       },
       colors: {

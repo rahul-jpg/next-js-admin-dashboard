@@ -1,6 +1,6 @@
 import { MdDownload } from 'react-icons/md';
-import data from "../../../data.json"
-import MyResponsiveLine from '@/components/MyResponsiveLine';
+import data from "../../../chartData/LineData.json"
+import MyResponsiveLine from '@/components/charts/LineChart';
 
 const Line = () => {
     const BACK_GRAOUND_COLOR = "bg-light-BGSC dark:bg-dark-BGSC"

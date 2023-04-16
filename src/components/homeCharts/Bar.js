@@ -1,5 +1,5 @@
-import MyResponsiveBar from '@/components/MyResponsiveBar';
-import barData from "../../../barData.json"
+import MyResponsiveBar from '@/components/charts/BarChart';
+import barData from "../../../chartData/barData"
 
 const Bar = () => {
     const BACK_GRAOUND_COLOR = "bg-light-BGSC dark:bg-dark-BGSC"

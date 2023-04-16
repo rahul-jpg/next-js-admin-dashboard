@@ -1,5 +1,5 @@
-import MyResponsiveGeo from "../MyResponsiveGeo"
-import geoData from "../../../geoData.json"
+import MyResponsiveGeo from "../charts/GeoChart"
+import geoData from "../../../chartData/geoData.json"
 
 const Geo = () => {
     const BACK_GRAOUND_COLOR = "bg-light-BGSC dark:bg-dark-BGSC"

@@ -1,0 +1,32 @@
+[
+    {
+      "id": "javascript",
+      "label": "javascript",
+      "value": 41,
+      "color": "hsl(234, 70%, 50%)"
+    },
+    {
+      "id": "stylus",
+      "label": "stylus",
+      "value": 379,
+      "color": "hsl(168, 70%, 50%)"
+    },
+    {
+      "id": "scala",
+      "label": "scala",
+      "value": 199,
+      "color": "hsl(332, 70%, 50%)"
+    },
+    {
+      "id": "hack",
+      "label": "hack",
+      "value": 130,
+      "color": "hsl(135, 70%, 50%)"
+    },
+    {
+      "id": "lisp",
+      "label": "lisp",
+      "value": 164,
+      "color": "hsl(172, 70%, 50%)"
+    }
+  ]

@@ -1,5 +1,4 @@
 import { BiSearch, BiMoon, BiBell, BiSun } from 'react-icons/bi';
-import { GrSettingsOption } from 'react-icons/gr';
 import { FaRegUser } from 'react-icons/fa';
 import { FiSettings } from 'react-icons/fi';
 import useThemeSwitcher from './hooks/useThemeSwitcher';
