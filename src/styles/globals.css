@@ -41,5 +41,6 @@
 
   .expand:has(input[type="checkbox"]:checked){
     margin: 1rem 0;
-    border-color: #1a1a1a;
+    border-color:transparent;
+  
   }

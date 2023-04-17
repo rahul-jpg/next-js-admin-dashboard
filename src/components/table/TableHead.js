@@ -1,6 +1,18 @@
 import { AiFillCaretDown } from 'react-icons/ai';
 import { BsDashSquare } from 'react-icons/bs';
 
+const Th = ({ columnHide, sortOrder, handleSort, text }) => {
+    return (
+        <th
+            className={`p-2 items-center group ${columnHide[text.toLowerCase()] ? "hidden" : ""}`}
+            onClick={() => handleSort(text.toLowerCase())}
+        >
+            {text}
+            <AiFillCaretDown className={`w-4 h-4 sm:w-3 sm:h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
+        </th>
+    )
+}
+
 const TableHead = ({
     selectedRows,
     selectAll,
@@ -26,70 +38,58 @@ const TableHead = ({
                     }
                 </th>
 
-                <th
-                    className={`p-2 items-center group ${columnHide.id ? "hidden" : ""}`}
-                    onClick={() => handleSort('id')}
-                >
-                    Id
-                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                </th>
-
-                <th
-                    className={`p-2 ${columnHide.name ? "hidden" : ""} group`}
-                    onClick={() => handleSort('name')}
-                >
-                    Name
-                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                </th>
-
-                <th
-                    className={`p-2 ${columnHide.email ? "hidden" : ""} group`}
-                    onClick={() => handleSort('email')}
-                >
-                    Email
-                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                </th>
-
-                <th
-                    className={`p-2 ${columnHide.age ? "hidden" : ""} group`}
-                    onClick={() => handleSort('age')}
-                >
-                    Age
-                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                </th>
-                <th className={`p-2 ${columnHide.phone ? "hidden" : ""} group`}
-                    onClick={() => handleSort('phone')}
-                >
-                    Phone
-                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                </th>
-                <th className={`p-2 ${columnHide.city ? "hidden" : ""} group`}
-                    onClick={() => handleSort('city')}
-                >
-                    City
-                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                </th>
-                <th className={`p-2 ${columnHide.address ? "hidden" : ""} group`}
-                    onClick={() => handleSort('address')}
-                >
-                    Address
-                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                </th>
-                <th className={`p-2 ${columnHide.zipcode ? "hidden" : ""} group`}
-                    onClick={() => handleSort('zipcode')}
-                >
-                    Zipcode
-                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                </th>
-
-                <th
-                    className={`p-2 ${columnHide.access ? "hidden" : ""} group`}
-                    onClick={() => handleSort('access')}
-                >
-                    Access
-                    <AiFillCaretDown className={`w-4 h-4 ${sortOrder === "desc" && "-rotate-180"} transition-all duration-200 ease-in opacity-0 group-hover:opacity-100 inline`} />
-                </th>
-
+                <Th
+                    columnHide={columnHide}
+                    sortOrder={sortOrder}
+                    handleSort={handleSort}
+                    text={"Id"}
+                />
+                <Th
+                    columnHide={columnHide}
+                    sortOrder={sortOrder}
+                    handleSort={handleSort}
+                    text={"Name"}
+                />
+                <Th
+                    columnHide={columnHide}
+                    sortOrder={sortOrder}
+                    handleSort={handleSort}
+                    text={"Email"}
+                />
+                <Th
+                    columnHide={columnHide}
+                    sortOrder={sortOrder}
+                    handleSort={handleSort}
+                    text={"Age"}
+                />
+                <Th
+                    columnHide={columnHide}
+                    sortOrder={sortOrder}
+                    handleSort={handleSort}
+                    text={"Phone"}
+                />
+                <Th
+                    columnHide={columnHide}
+                    sortOrder={sortOrder}
+                    handleSort={handleSort}
+                    text={"City"}
+                /><Th
+                    columnHide={columnHide}
+                    sortOrder={sortOrder}
+                    handleSort={handleSort}
+                    text={"Address"}
+                /><Th
+                    columnHide={columnHide}
+                    sortOrder={sortOrder}
+                    handleSort={handleSort}
+                    text={"Zipcode"}
+                />
+                <Th
+                    columnHide={columnHide}
+                    sortOrder={sortOrder}
+                    handleSort={handleSort}
+                    text={"Access"}
+                />
             </tr>
         </thead>
     )

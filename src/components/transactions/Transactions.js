@@ -3,8 +3,6 @@ import TransactionItem from "./TransactionItem"
 const Transactions = () => {
     const BACK_GRAOUND_COLOR = "bg-light-BGSC dark:bg-dark-BGSC"
     const TEXT_COLOR = "text-light-TXC-600 dark:text-dark-TXC-100"
-    const TEXT_COLOR_LIGHT = "text-light-TXC-400 dark:text-dark-TXC-400"
-    const TEXT_COLOR_EXTRA_LIGHT = "text-light-TXC-100 dark:text-dark-TXC-400"
     return (
         <div className={` col-span-4 2xl:col-span-6 lg:col-span-12 overflow-y-scroll h-80 relative`}>
             <h2 className={`${TEXT_COLOR} ${BACK_GRAOUND_COLOR} font-semibold p-3 mb-1 sticky top-0`}>Recent Transactions</h2>
