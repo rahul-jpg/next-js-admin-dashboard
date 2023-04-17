@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 
-const Menu = ({ path, isOpen, logo, text }) => {
+const Menu = ({ path, isOpen, logo, text, setIsOpen }) => {
     const TEXT_COLOR_EXTRA_LIGHT = "text-light-TXC-100 dark:text-dark-TXC-400"
     const Logo = () => {
         let newLogo = { ...logo }
@@ -8,8 +8,13 @@ const Menu = ({ path, isOpen, logo, text }) => {
         return newLogo
     }
     const router = useRouter()
+
+    const handleClick = () => {
+        router.push(path)
+        setIsOpen(false)
+    }
     return (
-        <div className={`flex space-x-8 items-center cursor-pointer hover:text-blueAccent-400 dark:hover:text-blueAccent-400 ${router.asPath === path ? "text-blueAccent-400" : TEXT_COLOR_EXTRA_LIGHT}`} onClick={() => router.push(path)}>
+        <div className={`flex space-x-8 items-center cursor-pointer hover:text-blueAccent-400 dark:hover:text-blueAccent-400 ${router.asPath === path ? "text-blueAccent-400" : TEXT_COLOR_EXTRA_LIGHT}`} onClick={handleClick}>
             <Logo />
             <p className={`${isOpen ? "bock" : "hidden"}`}>{text}</p>
         </div>

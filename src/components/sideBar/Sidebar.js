@@ -21,13 +21,14 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                 <div className="mt-8 sm:mt-6 self-start flex font-semibold">
                     <Menu
                         isOpen={isOpen}
+                        setIsOpen={setIsOpen}
                         path={"/"}
                         logo={<AiOutlineHome />}
                         text={"Dashboard"}
                     />
                 </div>
-                <PageMenus isOpen={isOpen} />
-                <ChartMenus isOpen={isOpen} />
+                <PageMenus isOpen={isOpen} setIsOpen={setIsOpen} />
+                <ChartMenus isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
         </>
 
