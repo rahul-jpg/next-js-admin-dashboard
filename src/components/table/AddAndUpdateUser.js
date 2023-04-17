@@ -15,7 +15,7 @@ const AddAndUpdateUser = ({
         <form className={`${addAndUpdateUserModalToggle ? "translate-y-0" : "-translate-y-[30rem]"} w-[50%] shadow-md transition-all duration-300 ease-in absolute top-[0] lg:translate-x-0 lg:left-[20%] sm:left-[15%] xs:left-[5%] translate-x-[50%] flex flex-col space-y-4 bg-light-BGC p-4 xs:p-2 overflow-hidden dark:bg-dark-BGC xs:w-[90%] sm:w-[70%] lg:w-[60%] z-10`}>
 
             <AiOutlineClose
-                className="w-5 h-5 cursor-pointer"
+                className="w-5 h-5 cursor-pointer self-end"
                 onClick={handleAddAndUpdateUserModalClose}
             />
             <div className="h-[15rem] overflow-y-scroll flex flex-col space-y-4 w-full">

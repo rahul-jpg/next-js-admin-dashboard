@@ -17,7 +17,7 @@ const Table = ({
 }) => {
     return (
         <div className="border-2 dark:border-blueAccent-600 max-h-[20rem] border-blueAccent-100 mt-2 overflow-scroll">
-            <table className="text-left w-full min-w-[50rem]">
+            <table className="text-left w-full min-w-[60rem]">
                 <TableHead
                     selectedRows={selectedRows}
                     selectAll={selectAll}

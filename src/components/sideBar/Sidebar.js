@@ -11,7 +11,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     return (
         <>
             <div className={`
-            ${isOpen ? "sm:shadow-xl p-6" : "sm:p-5 sm:h-12  sm:rounded-br-full pl-4"} w-full h-full overflow-hidden sm:transition-all sm:duration-150 sm:ease-in-out ${BACK_GRAOUND_COLOR} flex flex-col items-center sm:top-0 sm:left-0 text-sm lg:text-xs`
+            ${isOpen ? "sm:shadow-xl p-6" : "sm:p-5 sm:rounded-br-full pl-4"} w-full h-full overflow-hidden sm:transition-all sm:duration-150 sm:ease-in-out ${BACK_GRAOUND_COLOR} flex flex-col items-center sm:top-0 sm:left-0 text-sm lg:text-xs`
             }>
 
                 <Hamburger isOpen={isOpen} handleClick={handleClick} />

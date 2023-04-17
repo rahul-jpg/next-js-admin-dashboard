@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
         <main className={`${montserrat.variable} flex bg-light-BGC dark:bg-dark-BGC`}>
-          <div className={`${isOpen ? "w-[16rem] min-w-[16rem] xs:w-[14rem]" : "w-[4rem] min-w-[4rem] sm:w-16"} md:fixed z-20 h-screen`}>
+          <div className={`${isOpen ? "w-[16rem] min-w-[16rem] xs:w-[14rem] sm:h-screen" : "w-[4rem] min-w-[4rem] sm:w-16"} md:fixed z-20 h-screen sm:h-12`}>
             <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
           <div className={`${isOpen ? "w-[85%] md:w-[100%]" : "w-[97%] md:w-[100%] md:ml-[4rem] sm:ml-0"} overflow-x-hidden overflow-y-scroll h-screen`}>
