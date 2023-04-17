@@ -19,7 +19,7 @@ const Card = ({ logo, value, title, percent }) => {
 
             </div>
             <div className='flex flex-col justify-between items-center sm:flex-row xs:relative xs:justify-center'>
-                <CircularBar percent={percent} svgSize={12} circleSize={20} circleWidth={7} adjust={1} />
+                <CircularBar percent={percent} svgSize="h-12 w-12" circleSize={20} circleWidth={7} adjust="translate-x-1 translate-y-1" />
                 <p className='italic text-greenAccent-400 md:text-sm sm:text-lg xs:absolute xs:text-xs xs:left-1/5'>+{percent}%</p>
             </div>
         </div>

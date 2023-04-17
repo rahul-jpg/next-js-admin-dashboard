@@ -6,7 +6,7 @@ const CircularProgress = () => {
     return (
         <div className={`col-span-4 3xl:col-span-6 lg:col-span-12 p-5 flex flex-col items-center ${BACK_GRAOUND_COLOR}`}>
             <h2 className={`${TEXT_COLOR} font-semibold self-start mb-4 md:text-sm`}>Campaign</h2>
-            <CircularBar percent={80} svgSize={32} circleSize={55} circleWidth={15} adjust={2} />
+            <CircularBar percent={80} svgSize="w-32 h-32" circleSize={55} circleWidth={15} adjust="translate-x-2 translate-y-2" />
             <p className={`text-greenAccent-400 mt-4 md:text-sm`}>
                 $48,352 revenue generated
             </p>

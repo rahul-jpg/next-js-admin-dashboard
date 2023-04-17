@@ -1,5 +1,5 @@
 import { MdDownload } from 'react-icons/md';
-import data from "../../../chartData/LineData.json"
+import data from "../../../chartData/lineData.json"
 import MyResponsiveLine from '@/components/charts/LineChart';
 
 const Line = () => {
